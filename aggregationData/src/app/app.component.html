@@ -1,0 +1,11 @@
+
+<h1> Send value</h1>
+
+<input [(ngModel)]="valueTyped" placeholder="valueTyped">
+<button (click)="sendValue()">Send value</button>
+
+<h1> Values :</h1>
+
+<li *ngFor="let value of values">
+    <span> {{value}} °C</span>
+</li>

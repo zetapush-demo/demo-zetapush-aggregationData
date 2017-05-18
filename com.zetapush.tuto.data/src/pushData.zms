@@ -1,0 +1,8 @@
+/**
+	Called by the client to add a new temperature (simulate a sensor)
+*/
+macroscript pushData(number value) {
+	
+	data.push({items : [{'value': value, 'name': 'sensorTemperature', 'category': 'temperature'}]});
+	
+} return { value } on channel __selfName

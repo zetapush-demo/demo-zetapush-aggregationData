@@ -1,0 +1,8 @@
+/**
+	Callback of aggregation service to stock the new average and send it to the client
+*/
+macroscript showTemperature(number value) {
+	
+	db.put({table : 'tableData', data : value, key : 'key', column : 'columnData', owner: __userKey});
+
+} broadcast ( __userKey ) { value } on channel __selfName

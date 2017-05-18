@@ -1,0 +1,36 @@
+recipe com.zetapush.tuto.data 1.0.0;
+
+/** a simple authentication service */
+service auth = simple(__default);
+
+/** our code is run by this service */
+service code = macro(__default) for 'src';
+
+/** Data aggregation service */
+service data = aggreg(__default);
+
+/** Database service */
+service db = gda(__default);
+
+/** key : 'key' */
+db.gda_createTable({
+	columns : [
+		{'name' : 'columnData', 'type' : GdaDataType_DOUBLE}
+	], name : 'tableData'
+});
+
+
+data.aggreg_create({
+	'type': AggregationItemType_MEAN,
+	'periods': [1],
+	'category': 'temperature',
+	'deploymentId': code,
+	'verb': Verb_macro_func,
+	'parameter': {
+		'name': #showTemperature,
+		'parameters': {
+			'value': AggregationCallbackField_value
+		}
+	},
+	'loud': true
+	});
